@@ -1,0 +1,28 @@
+# Cache static assets aggressively
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+/favicon.ico
+  Cache-Control: public, max-age=86400
+/og-image.png
+  Cache-Control: public, max-age=86400
+
+# HTML pages - short cache or no-cache to allow updates
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Sitemap and robots - allow caching for a few hours
+/sitemap.xml
+  Cache-Control: public, max-age=43200
+/robots.txt
+  Cache-Control: public, max-age=43200
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

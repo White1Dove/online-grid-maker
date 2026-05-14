@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Free Perspective Drawing Grid - 1 Point &amp; 2 Point Perspective Tool Online</title>
+    <meta name="description" content="Generate perspective grid overlays for architectural and scene drawing. Create 1-point or 2-point vanishing point guides. Free online tool.">
+    <link rel="canonical" href="https://onlinegridmaker.com/perspective-drawing-grid.html">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "OnlineGridMaker - Perspective Drawing Grid",
+        "url": "https://onlinegridmaker.com/perspective-drawing-grid.html",
+        "description": "Free online perspective drawing grid generator. Add vanishing point and horizon line guides to reference images.",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a perspective drawing grid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A perspective grid adds a horizon line and vanishing point guides to an image, helping artists draw architectural scenes and objects with correct depth and dimension."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between 1-point and 2-point perspective?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "One-point perspective has a single vanishing point (center, left, or right), ideal for straight-on views. Two-point perspective uses two vanishing points at opposite edges, better for corner or angled views."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I adjust the horizon line?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the Horizon Line slider to move the horizon up (15% to 85%). Lower horizons create a worm's-eye view; higher horizons create a bird's-eye view."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this tool free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The perspective grid generator is completely free with no signup required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I combine the perspective grid with a regular grid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The perspective page includes both the standard row/column grid and the perspective vanishing guides overlaid on your image simultaneously."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body data-page="perspective">
+    <header class="site-header">
+      <a class="logo" href="/" aria-label="OnlineGridMaker home">OnlineGridMaker</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/">Grid Maker</a>
+        <a href="drawing-grid-maker.html">Drawing Grid</a>
+        <a href="perspective-drawing-grid.html" aria-current="page">Perspective</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <h1 id="page-title">Perspective Drawing Grid Generator</h1>
+        <p>Add horizon and vanishing point guides to a reference image for architectural and scene drawing.</p>
+      </section>
+
+      <section class="tool" aria-label="Perspective drawing grid tool">
+        <div class="preview-card">
+          <label class="upload-zone" id="uploadZone" for="imageInput">
+            <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+            <span class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 3v11m0-11 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
+              </svg>
+            </span>
+            <span class="upload-title">Drop an image here or click to upload</span>
+            <span class="upload-note">JPG, PNG, WebP, or static GIF up to 20MB</span>
+          </label>
+          <div class="canvas-wrap" id="canvasWrap" hidden>
+            <canvas id="gridCanvas"></canvas>
+          </div>
+          <p class="message" id="statusMessage" role="status" aria-live="polite"></p>
+        </div>
+
+        <form class="controls" id="controls" aria-label="Perspective grid settings">
+          <fieldset class="segmented-field" aria-label="Grid Type">
+            <legend>Grid Type</legend>
+            <div class="segmented-control">
+              <button class="segmented-option is-active" id="gridTypeCustom" type="button" data-grid-type="custom" aria-pressed="true">Custom</button>
+              <button class="segmented-option" id="gridTypeSquare" type="button" data-grid-type="square" aria-pressed="false">Square</button>
+            </div>
+          </fieldset>
+          <div class="control-grid">
+            <label class="field">
+              <span>Rows</span>
+              <input id="rows" name="rows" type="number" min="1" max="50" step="1" value="5" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Columns</span>
+              <input id="cols" name="cols" type="number" min="1" max="50" step="1" value="5" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Line Width</span>
+              <input id="lineWidth" name="lineWidth" type="number" min="1" max="10" step="1" value="2" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Color</span>
+              <input id="color" name="color" type="color" value="#000000">
+            </label>
+            <label class="field field-wide">
+              <span>Opacity <output id="opacityValue" for="opacity">0.5</output></span>
+              <input id="opacity" name="opacity" type="range" min="0" max="1" step="0.05" value="0.5">
+            </label>
+          </div>
+          <div class="control-divider"></div>
+          <div class="checks">
+            <label><input id="labels" name="labels" type="checkbox"> Labels</label>
+            <label><input id="diagonal" name="diagonal" type="checkbox"> Diagonal lines</label>
+            <label><input id="grayscale" name="grayscale" type="checkbox"> Grayscale</label>
+          </div>
+          <div class="perspective-controls" id="perspectiveControls">
+            <div class="control-divider"></div>
+            <div class="control-grid">
+              <label class="field">
+                <span>Vanishing Point</span>
+                <select id="vanishingPoint" name="vanishingPoint">
+                  <option value="center">Center</option>
+                  <option value="left">Left</option>
+                  <option value="right">Right</option>
+                  <option value="two-point">Two Point</option>
+                </select>
+              </label>
+              <label class="field field-wide">
+                <span>Horizon Line <output id="horizonValue" for="horizon">50%</output></span>
+                <input id="horizon" name="horizon" type="range" min="15" max="85" step="1" value="50">
+              </label>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="button primary" id="downloadBtn" type="button" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"></path>
+              </svg>
+              Download PNG
+            </button>
+            <button class="button secondary" id="resetBtn" type="reset">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M4 7h10a6 6 0 1 1-5.3 8.8M4 7l4-4M4 7l4 4"></path>
+              </svg>
+              Reset
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="content-section" aria-labelledby="about-title">
+        <h2 id="about-title">Perspective Guides for Reference Images</h2>
+        <p>Perspective drawing grids add a horizon line and vanishing point guides over an image. Use the controls to place a one-point guide at the center, left, or right, or switch to two-point guides for scenes with two directional edge sets.</p>
+      </section>
+
+      <section class="content-section faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <details>
+          <summary>What is a perspective drawing grid?</summary>
+          <p>A perspective grid adds a horizon line and vanishing point guides to an image, helping artists draw architectural scenes with correct depth.</p>
+        </details>
+        <details>
+          <summary>What is the difference between 1-point and 2-point perspective?</summary>
+          <p>One-point has a single vanishing point (center, left, or right) for straight-on views. Two-point uses two points at opposite edges for corner or angled views.</p>
+        </details>
+        <details>
+          <summary>How do I adjust the horizon line?</summary>
+          <p>Use the Horizon Line slider (15% to 85%). Lower horizons create a worm's-eye view; higher horizons create a bird's-eye view.</p>
+        </details>
+        <details>
+          <summary>Is this tool free?</summary>
+          <p>Yes. Completely free with no signup required.</p>
+        </details>
+        <details>
+          <summary>Can I combine perspective grid with regular grid?</summary>
+          <p>Yes. The page includes both standard row/column grids and perspective vanishing guides overlaid together on your image.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 OnlineGridMaker</span>
+      <nav aria-label="Footer navigation">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms of Use</a>
+      </nav>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
