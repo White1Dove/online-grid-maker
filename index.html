@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Free Grid Maker for Drawing - Add Grid Overlay to Images Online</title>
+    <meta name="description" content="Add a precise grid overlay to any reference image for drawing and sketching. Adjust rows, columns, line color & thickness. Free, no signup. Your image stays in your browser.">
+    <meta name="keywords" content="grid maker, drawing grid, grid overlay, add grid to image, drawing tool, art grid, sketching grid">
+    <meta property="og:title" content="Free Grid Maker for Drawing">
+    <meta property="og:description" content="Add a precise grid overlay to any reference image. Free online tool, no upload required.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://onlinegridmaker.com">
+    <meta property="og:image" content="https://onlinegridmaker.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Grid Maker for Drawing">
+    <meta name="twitter:description" content="Add grid overlay to images for drawing. Free, no signup required.">
+    <link rel="canonical" href="https://onlinegridmaker.com/">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "OnlineGridMaker",
+        "url": "https://onlinegridmaker.com",
+        "description": "Free online grid maker for drawing. Add grid overlay to reference images.",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a grid maker used for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A grid maker adds evenly spaced guide lines to a reference image so artists can copy proportions, placement, and shapes more accurately."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. OnlineGridMaker is free to use and does not require signup."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I change color and thickness?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can adjust grid color, opacity, line width, rows, and columns before downloading the result."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to create an account?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No account is needed. The tool runs directly in your browser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I use it for drawing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Upload a reference image, choose the number of rows and columns, enable labels if needed, then download the gridded image for drawing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my image uploaded anywhere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Image processing happens locally in your browser, and your image is not uploaded to a server."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What file formats are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The uploader supports JPG, PNG, WebP, and static GIF images up to 20MB."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this for Instagram grids?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This tool is built for drawing reference grids, not Instagram tile splitting."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body data-page="grid">
+    <header class="site-header">
+      <a class="logo" href="/" aria-label="OnlineGridMaker home">OnlineGridMaker</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/" aria-current="page">Grid Maker</a>
+        <a href="drawing-grid-maker.html">Drawing Grid</a>
+        <a href="perspective-drawing-grid.html">Perspective</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <h1 id="page-title">Free Grid Maker for Drawing</h1>
+        <p>Add a precise grid overlay to any reference image. Your image stays in your browser -- nothing is uploaded.</p>
+      </section>
+
+      <section class="tool" aria-label="Grid maker tool">
+        <div class="preview-card">
+          <label class="upload-zone" id="uploadZone" for="imageInput">
+            <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+            <span class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 3v11m0-11 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
+              </svg>
+            </span>
+            <span class="upload-title">Drop an image here or click to upload</span>
+            <span class="upload-note">JPG, PNG, WebP, or static GIF up to 20MB</span>
+          </label>
+          <div class="canvas-wrap" id="canvasWrap" hidden>
+            <canvas id="gridCanvas"></canvas>
+          </div>
+          <button class="button change-image-btn" id="changeImageBtn" type="button" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 3v11m0-11 4 4m-4-4-4-4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
+            </svg>
+            Change Image
+          </button>
+          <div class="printing-guide" id="printingGuide" hidden>
+            <h3>Printing Guide</h3>
+            <p id="printingGuideIntro"></p>
+            <ul id="printingGuideList"></ul>
+          </div>
+          <p class="message" id="statusMessage" role="status" aria-live="polite"></p>
+        </div>
+
+        <form class="controls" id="controls" aria-label="Grid settings">
+          <fieldset class="segmented-field" aria-label="Grid Type">
+            <legend>Grid Type</legend>
+            <div class="segmented-control">
+              <button class="segmented-option is-active" id="gridTypeCustom" type="button" data-grid-type="custom" aria-pressed="true">Custom</button>
+              <button class="segmented-option" id="gridTypeSquare" type="button" data-grid-type="square" aria-pressed="false">Square</button>
+            </div>
+          </fieldset>
+          <div class="control-grid">
+            <label class="field">
+              <span>Rows</span>
+              <input id="rows" name="rows" type="number" min="1" max="50" step="1" value="5" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Columns</span>
+              <input id="cols" name="cols" type="number" min="1" max="50" step="1" value="5" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Line Width</span>
+              <input id="lineWidth" name="lineWidth" type="number" min="1" max="10" step="1" value="2" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Color</span>
+              <input id="color" name="color" type="color" value="#000000">
+            </label>
+            <label class="field field-wide">
+              <span>Opacity <output id="opacityValue" for="opacity">0.5</output></span>
+              <input id="opacity" name="opacity" type="range" min="0" max="1" step="0.05" value="0.5">
+            </label>
+          </div>
+          <div class="control-divider"></div>
+          <div class="checks">
+            <label><input id="labels" name="labels" type="checkbox"> Labels</label>
+            <label><input id="diagonal" name="diagonal" type="checkbox"> Diagonal lines</label>
+            <label><input id="grayscale" name="grayscale" type="checkbox"> Grayscale</label>
+          </div>
+          <div class="paper-format" id="paperFormatSection">
+            <div class="control-divider"></div>
+            <label class="field field-wide">
+              <span>Paper Format</span>
+              <small>Select your drawing paper size (mm)</small>
+              <select id="paperFormat" name="paperFormat">
+                <option value="a4" selected>A4 (210×297mm)</option>
+                <option value="a3">A3 (297×420mm)</option>
+                <option value="a5">A5 (148×210mm)</option>
+                <option value="letter">Letter (216×279mm)</option>
+                <option value="legal">Legal (216×356mm)</option>
+                <option value="custom">Custom</option>
+              </select>
+            </label>
+            <div class="custom-paper-grid" id="customPaperFields" hidden>
+              <label class="field">
+                <span>Width</span>
+                <input id="paperWidth" name="paperWidth" type="number" min="1" max="2000" step="1" value="210" inputmode="decimal">
+              </label>
+              <label class="field">
+                <span>Height</span>
+                <input id="paperHeight" name="paperHeight" type="number" min="1" max="2000" step="1" value="297" inputmode="decimal">
+              </label>
+            </div>
+          </div>
+          <div class="perspective-controls" id="perspectiveControls" hidden>
+            <div class="control-divider"></div>
+            <div class="control-grid">
+              <label class="field">
+                <span>Vanishing Point</span>
+                <select id="vanishingPoint" name="vanishingPoint">
+                  <option value="center">Center</option>
+                  <option value="left">Left</option>
+                  <option value="right">Right</option>
+                  <option value="two-point">Two Point</option>
+                </select>
+              </label>
+              <label class="field field-wide">
+                <span>Horizon Line <output id="horizonValue" for="horizon">50%</output></span>
+                <input id="horizon" name="horizon" type="range" min="15" max="85" step="1" value="50">
+              </label>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="button primary" id="downloadBtn" type="button" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"></path>
+              </svg>
+              Download PNG
+            </button>
+            <button class="button secondary" id="resetBtn" type="reset">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M4 7h10a6 6 0 1 1-5.3 8.8M4 7l4-4M4 7l4 4"></path>
+              </svg>
+              Reset
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="content-section" aria-labelledby="what-title">
+        <h2 id="what-title">What is a Grid Maker?</h2>
+        <p>A grid maker is a drawing aid that places evenly spaced guide lines over a reference image. Artists use the grid method to compare small sections of an image, transfer proportions, and keep important edges aligned while sketching. OnlineGridMaker lets you choose rows, columns, line color, opacity, labels, diagonal guides, and grayscale mode, then download a clean PNG with the grid applied. Everything runs in your browser, so the original image never leaves your device.</p>
+      </section>
+
+      <section class="content-section faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <details>
+          <summary>What is a grid maker used for?</summary>
+          <p>It is used to add guide lines to a reference image so drawing proportions and placement are easier to measure.</p>
+        </details>
+        <details>
+          <summary>Is this free?</summary>
+          <p>Yes. The tool is free and does not require an account.</p>
+        </details>
+        <details>
+          <summary>Can I change color/thickness?</summary>
+          <p>Yes. You can change the grid color, line width, opacity, rows, and columns.</p>
+        </details>
+        <details>
+          <summary>Do I need to create an account?</summary>
+          <p>No. You can upload, edit, and download directly in the browser.</p>
+        </details>
+        <details>
+          <summary>How do I use it for drawing?</summary>
+          <p>Upload a reference image, set a grid density that fits the drawing, enable labels if helpful, and download the gridded PNG.</p>
+        </details>
+        <details>
+          <summary>Is my image uploaded anywhere?</summary>
+          <p>No. Your image is processed locally in your browser and is not sent to a server.</p>
+        </details>
+        <details>
+          <summary>What file formats are supported?</summary>
+          <p>JPG, PNG, WebP, and static GIF files up to 20MB are supported.</p>
+        </details>
+        <details>
+          <summary>Can I use this for Instagram grids?</summary>
+          <p>No. OnlineGridMaker is focused on drawing reference grids, not splitting images into social media tiles.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 OnlineGridMaker</span>
+      <nav aria-label="Footer navigation">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms of Use</a>
+      </nav>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
