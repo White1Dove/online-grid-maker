@@ -230,6 +230,14 @@ main {
   border-bottom: 1px solid var(--border);
 }
 
+.preview-topbar .toggle-btn,
+.preview-topbar .button {
+  width: 205px;
+  min-height: 52px;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+}
+
 .upload-zone {
   display: flex;
   min-height: 360px;
