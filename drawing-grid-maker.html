@@ -239,46 +239,57 @@
           </div>
         </form>
 
-        <div class="preview-card">
-          <div class="preview-topbar" id="previewTopbar" hidden>
-            <button type="button" class="toggle-btn" id="grayscaleToggle">Convert to Black &amp; White</button>
-            <button class="button primary" id="downloadBtn" type="button" disabled>
+        <div class="preview-card has-sidebar">
+          <div class="preview-main">
+            <div class="preview-topbar" id="previewTopbar" hidden>
+              <button type="button" class="toggle-btn" id="grayscaleToggle">Convert to Black &amp; White</button>
+              <button class="button primary" id="downloadBtn" type="button" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"></path>
+                </svg>
+                Download PNG
+              </button>
+            </div>
+
+            <label class="upload-zone" id="uploadZone" for="imageInput">
+              <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+              <span class="upload-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M12 3v11m0-11 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
+                </svg>
+              </span>
+              <span class="upload-title">Upload Reference Image</span>
+              <span class="upload-subtitle">Drag and drop your reference image here, or click the button below to browse your files</span>
+              <span class="upload-note">Supported formats: JPG, PNG, GIF, WEBP</span>
+              <button class="button primary upload-btn" type="button" id="uploadBtn">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 3v11m0-11 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
+                </svg>
+                Upload Image
+              </button>
+            </label>
+
+            <div class="canvas-wrap" id="canvasWrap" hidden>
+              <canvas id="gridCanvas"></canvas>
+            </div>
+
+            <button class="button change-image-btn" id="changeImageBtn" type="button" hidden>
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"></path>
+                <path d="M12 3v11m0-11 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
               </svg>
-              Download PNG
+              Change Image
             </button>
           </div>
 
-          <label class="upload-zone" id="uploadZone" for="imageInput">
-            <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
-            <span class="upload-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false">
-                <path d="M12 3v11m0-11 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
-              </svg>
-            </span>
-            <span class="upload-title">Drop an image here or click to upload</span>
-            <span class="upload-note">JPG, PNG, WebP, or static GIF up to 100MB</span>
-          </label>
+          <div class="preview-sidebar">
+            <div class="printing-guide" id="printingGuide" hidden>
+              <h3>Printing Guide</h3>
+              <p id="printingGuideIntro"></p>
+              <ul id="printingGuideList"></ul>
+            </div>
 
-          <div class="canvas-wrap" id="canvasWrap" hidden>
-            <canvas id="gridCanvas"></canvas>
+            <p class="message" id="statusMessage" role="status" aria-live="polite"></p>
           </div>
-
-          <button class="button change-image-btn" id="changeImageBtn" type="button" hidden>
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M12 3v11m0-11 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path>
-            </svg>
-            Change Image
-          </button>
-
-          <div class="printing-guide" id="printingGuide" hidden>
-            <h3>Printing Guide</h3>
-            <p id="printingGuideIntro"></p>
-            <ul id="printingGuideList"></ul>
-          </div>
-
-          <p class="message" id="statusMessage" role="status" aria-live="polite"></p>
         </div>
       </section>
 

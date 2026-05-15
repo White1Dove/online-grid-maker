@@ -121,6 +121,15 @@
       }
     });
 
+    var uploadBtn = document.getElementById("uploadBtn");
+    if (uploadBtn) {
+      uploadBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        els.imageInput.click();
+      });
+    }
+
     ["dragenter", "dragover"].forEach(function (eventName) {
       els.uploadZone.addEventListener(eventName, function (event) {
         event.preventDefault();
@@ -751,11 +760,11 @@
     var settings = getSettings();
     var naturalWidth = state.image.naturalWidth;
     var naturalHeight = state.image.naturalHeight;
-    var containerWidth = els.canvasWrap.clientWidth - 32;
-    var containerHeight = els.canvasWrap.clientHeight - 32;
+    var containerWidth = els.canvasWrap.clientWidth - 24;
+    var containerHeight = els.canvasWrap.clientHeight - 8;
     if (containerWidth <= 0 || containerHeight <= 0) {
-      containerWidth = Math.min(600, window.innerWidth - 380);
-      containerHeight = 480;
+      containerWidth = Math.min(700, window.innerWidth - 380);
+      containerHeight = 580;
     }
     var imgAspect = naturalWidth / naturalHeight;
     var containerAspect = containerWidth / containerHeight;
@@ -796,6 +805,7 @@
 
   function renderForExport() {
     var settings = getSettings();
+    settings.isExport = true;
     var width = state.image.naturalWidth;
     var height = state.image.naturalHeight;
     var exportCanvas = document.createElement("canvas");
@@ -933,8 +943,11 @@
   }
 
   function drawLabels(targetCtx, rows, cols, cellWidth, cellHeight, settings) {
-    var fontSize = Math.max(5, Math.min(10, Math.floor(Math.min(cellWidth, cellHeight) * 0.12)));
-    var pad = Math.max(1.5, Math.min(5, fontSize * 0.35));
+    var fontRatio = settings.isExport ? 0.16 : 0.12;
+    var minFontSize = settings.isExport ? 12 : 8;
+    var maxFontSize = settings.isExport ? 24 : 14;
+    var fontSize = Math.max(minFontSize, Math.min(maxFontSize, Math.floor(Math.min(cellWidth, cellHeight) * fontRatio)));
+    var pad = Math.max(settings.isExport ? 3 : 2, Math.min(settings.isExport ? 8 : 5, fontSize * 0.3));
 
     targetCtx.font = fontSize + "px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
     targetCtx.textBaseline = "top";
@@ -944,8 +957,8 @@
       for (var col = 0; col < cols; col += 1) {
         var label = rowLabel + (col + 1);
         if (
-          targetCtx.measureText(label).width > cellWidth - pad * 2 ||
-          fontSize + pad * 2 > cellHeight
+          targetCtx.measureText(label).width > cellWidth - pad ||
+          fontSize + pad > cellHeight
         ) {
           continue;
         }

@@ -168,6 +168,11 @@ main {
   margin-bottom: 44px;
 }
 
+.tool[data-state="editing"],
+.tool:not([data-state]) {
+  align-items: stretch;
+}
+
 .preview-card,
 .controls {
   min-width: 0;
@@ -179,6 +184,40 @@ main {
 
 .preview-card {
   padding: 16px;
+}
+
+.tool[data-state="editing"] .preview-card:not(.has-sidebar),
+.tool:not([data-state]) .preview-card:not(.has-sidebar) {
+  display: flex;
+  flex-direction: column;
+}
+
+.tool[data-state="editing"] .preview-card.has-sidebar,
+.tool:not([data-state]) .preview-card.has-sidebar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.preview-main {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.preview-sidebar {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tool[data-state="editing"] .preview-main,
+.tool:not([data-state]) .preview-main {
+  height: 100%;
 }
 
 .preview-topbar {
@@ -197,7 +236,7 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   padding: 24px;
   background: var(--bg-upload);
   border: 2px dashed var(--border-hover);
@@ -240,7 +279,23 @@ main {
   font-weight: 600;
 }
 
-.upload-note,
+.upload-subtitle {
+  max-width: 320px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.upload-note {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.upload-btn {
+  margin-top: 8px;
+}
+
 .message {
   color: var(--text-muted);
   font-size: 14px;
@@ -249,13 +304,18 @@ main {
 
 .canvas-wrap {
   display: flex;
-  min-height: 560px;
+  min-height: 620px;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background: var(--bg-upload);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+}
+
+.tool[data-state="editing"] .canvas-wrap:not([hidden]),
+.tool:not([data-state]) .canvas-wrap:not([hidden]) {
+  flex: 1 1 auto;
 }
 
 #gridCanvas {
@@ -769,7 +829,6 @@ output {
 }
 
 .printing-guide {
-  margin-top: 14px;
   padding: 16px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -1140,6 +1199,18 @@ output {
   margin-top: 24px;
   padding-top: 18px;
   border-top: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .tool[data-state="editing"] .preview-card.has-sidebar,
+  .tool:not([data-state]) .preview-card.has-sidebar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .preview-sidebar {
+    order: 12;
+  }
 }
 
 @media (max-width: 800px) {
