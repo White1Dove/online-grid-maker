@@ -314,7 +314,7 @@
 
           <div class="preview-sidebar">
             <div class="printing-guide" id="printingGuide" hidden>
-              <h3>Printing Guide</h3>
+              <p class="printing-guide-title">Printing Guide</p>
               <p id="printingGuideIntro"></p>
               <ul id="printingGuideList"></ul>
             </div>
@@ -324,9 +324,10 @@
         </div>
 
         <div class="demo-preview">
-          <video aria-label="Grid Maker demo: upload an image and add grid overlay" width="1122" height="746" autoplay loop muted playsinline preload="metadata" poster="demo-preview-poster.webp">
-            <source src="demo-preview.webm" type="video/webm">
-            <source src="demo-preview.mp4" type="video/mp4">
+          <video id="demoVideo" aria-label="Grid Maker demo: upload an image and add grid overlay" width="1122" height="746" autoplay loop muted playsinline preload="none" poster="demo-preview-poster.webp">
+            <source data-src="demo-preview.webm" type="video/webm">
+            <source data-src="demo-preview.mp4" type="video/mp4">
+            <track kind="captions" src="demo-preview-captions.vtt" srclang="en" label="English">
           </video>
         </div>
       </section>

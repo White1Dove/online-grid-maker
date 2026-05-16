@@ -880,7 +880,7 @@ output {
   line-height: 1.5;
 }
 
-.printing-guide h3 {
+.printing-guide-title {
   margin: 0 0 8px;
   color: var(--text-primary);
   font-size: 14px;

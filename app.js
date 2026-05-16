@@ -112,6 +112,40 @@
     setToolState("demo");
     bindEvents();
     updateOutputs();
+    initializeDemoVideo();
+  }
+
+  function initializeDemoVideo() {
+    var video = document.getElementById("demoVideo");
+    if (!video) {
+      return;
+    }
+
+    function loadDemoVideo() {
+      var sources = video.querySelectorAll("source[data-src]");
+      sources.forEach(function (source) {
+        source.src = source.dataset.src;
+        source.removeAttribute("data-src");
+      });
+      video.load();
+      video.play().catch(function () {});
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      loadDemoVideo();
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          loadDemoVideo();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(video);
   }
 
   function bindEvents() {
