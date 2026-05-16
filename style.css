@@ -173,6 +173,11 @@ main {
   align-items: stretch;
 }
 
+.tool[data-state="demo"] {
+  grid-template-columns: 400px minmax(0, 1fr);
+  align-items: stretch;
+}
+
 .preview-card,
 .controls {
   min-width: 0;
@@ -192,12 +197,15 @@ main {
   flex-direction: column;
 }
 
-.tool[data-state="editing"] .preview-card.has-sidebar,
-.tool:not([data-state]) .preview-card.has-sidebar {
+.preview-card.has-sidebar.has-image {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 280px;
   gap: 16px;
   align-items: stretch;
+}
+
+.preview-card.has-sidebar:not(.has-image) .preview-sidebar {
+  display: none;
 }
 
 .preview-main {
@@ -218,6 +226,20 @@ main {
 .tool[data-state="editing"] .preview-main,
 .tool:not([data-state]) .preview-main {
   height: 100%;
+}
+
+.tool[data-state="demo"] .preview-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.tool[data-state="demo"] .preview-main {
+  height: 100%;
+}
+
+.tool[data-state="demo"] .upload-zone {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .preview-topbar {
@@ -363,7 +385,8 @@ main {
   box-shadow: var(--shadow-sm);
 }
 
-.demo-preview img {
+.demo-preview img,
+.demo-preview video {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius-md);
@@ -1210,8 +1233,7 @@ output {
 }
 
 @media (max-width: 900px) {
-  .tool[data-state="editing"] .preview-card.has-sidebar,
-  .tool:not([data-state]) .preview-card.has-sidebar {
+  .preview-card.has-sidebar.has-image {
     display: flex;
     flex-direction: column;
   }
@@ -1242,6 +1264,10 @@ output {
   }
 
   .tool {
+    grid-template-columns: 1fr;
+  }
+
+  .tool[data-state="demo"] {
     grid-template-columns: 1fr;
   }
 

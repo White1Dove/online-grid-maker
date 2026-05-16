@@ -2,7 +2,7 @@
   var MAX_FILE_SIZE = 100 * 1024 * 1024;
   var MAX_CANVAS_SIZE = 16384;
   var MAX_IMAGE_PIXELS = 30 * 1000 * 1000;
-  var MAX_GRID_COUNT = 30;
+  var MAX_GRID_COUNT = 26;
   var SUPPORTED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
   var page = document.body.dataset.page || "grid";
   var isPerspective = page === "perspective";
@@ -16,6 +16,7 @@
 
   var els = {
     tool: document.querySelector(".tool"),
+    previewCard: document.querySelector(".preview-card"),
     uploadZone: document.getElementById("uploadZone"),
     imageInput: document.getElementById("imageInput"),
     canvasWrap: document.getElementById("canvasWrap"),
@@ -243,6 +244,9 @@
         if (els.changeImageBtn) {
           els.changeImageBtn.hidden = false;
         }
+        if (els.previewCard) {
+          els.previewCard.classList.add("has-image");
+        }
         els.downloadBtn.disabled = false;
         setToolState("editing");
         showMessage("Image loaded locally in your browser.", false);
@@ -320,6 +324,9 @@
     }
     if (els.changeImageBtn) {
       els.changeImageBtn.hidden = true;
+    }
+    if (els.previewCard) {
+      els.previewCard.classList.remove("has-image");
     }
     els.downloadBtn.disabled = true;
     hidePrintingGuide();
@@ -943,31 +950,42 @@
   }
 
   function drawLabels(targetCtx, rows, cols, cellWidth, cellHeight, settings) {
-    var fontRatio = settings.isExport ? 0.16 : 0.12;
+    var fontRatio = settings.isExport ? 0.16 : 0.34;
     var minFontSize = settings.isExport ? 12 : 8;
     var maxFontSize = settings.isExport ? 24 : 14;
     var fontSize = Math.max(minFontSize, Math.min(maxFontSize, Math.floor(Math.min(cellWidth, cellHeight) * fontRatio)));
-    var pad = Math.max(settings.isExport ? 3 : 2, Math.min(settings.isExport ? 8 : 5, fontSize * 0.3));
+    var widestLabel = toColumnLabel(rows - 1) + cols;
+    var pad = getLabelPadding(fontSize, settings.isExport);
 
     targetCtx.font = fontSize + "px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+    while (
+      fontSize > minFontSize &&
+      (
+        targetCtx.measureText(widestLabel).width > cellWidth - pad * 2 ||
+        fontSize > cellHeight - pad * 2
+      )
+    ) {
+      fontSize -= 1;
+      pad = getLabelPadding(fontSize, settings.isExport);
+      targetCtx.font = fontSize + "px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+    }
+
     targetCtx.textBaseline = "top";
 
     for (var row = 0; row < rows; row += 1) {
       var rowLabel = toColumnLabel(row);
       for (var col = 0; col < cols; col += 1) {
         var label = rowLabel + (col + 1);
-        if (
-          targetCtx.measureText(label).width > cellWidth - pad ||
-          fontSize + pad > cellHeight
-        ) {
-          continue;
-        }
         var y = settings.labelPosition === "bottom-left"
           ? cellHeight * (row + 1) - pad - fontSize
           : row * cellHeight + pad;
         targetCtx.fillText(label, col * cellWidth + pad, y);
       }
     }
+  }
+
+  function getLabelPadding(fontSize, isExport) {
+    return Math.max(isExport ? 2 : 1, Math.min(isExport ? 8 : 4, Math.floor(fontSize * 0.25)));
   }
 
   function toColumnLabel(index) {
