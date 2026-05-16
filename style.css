@@ -83,10 +83,24 @@ svg {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   flex: 0 0 auto;
   color: var(--text-primary);
   font-weight: 800;
   letter-spacing: 0;
+}
+
+.logo-mark {
+  display: block;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+}
+
+.logo-wordmark {
+  display: inline-block;
 }
 
 .nav {
