@@ -112,7 +112,7 @@ svg {
 }
 
 .nav a[aria-current="page"] {
-  color: #E53935;
+  color: var(--accent);
   font-weight: 700;
   text-decoration: underline;
   text-decoration-thickness: 2px;
@@ -163,7 +163,7 @@ main {
 }
 
 .ti-check {
-  color: #E53935;
+  color: var(--accent);
   font-weight: 700;
   font-size: 14px;
 }
@@ -293,7 +293,7 @@ main {
 .upload-zone:hover,
 .upload-zone.is-dragover {
   background: #fafafa;
-  border-color: #E53935;
+  border-color: var(--accent);
 }
 
 .upload-zone input {
@@ -1335,6 +1335,10 @@ output {
     order: 13;
   }
 
+  /* Hide demo video on mobile to improve Lighthouse performance */
+  .demo-preview {
+    display: none;
+  }
 }
 
 @media (max-width: 520px) {
