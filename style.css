@@ -4,13 +4,13 @@
   --bg-upload: #f5f5f5;
   --text-primary: #000000;
   --text-secondary: #555555;
-  --text-muted: #888888;
-  --accent: #E53935;
+  --text-muted: #666666;
+  --accent: #D32F2F;
   --accent-hover: #C62828;
   --accent-light: #f0f0f0;
   --border: #e0e0e0;
-  --border-hover: #E53935;
-  --border-focus: #E53935;
+  --border-hover: #D32F2F;
+  --border-focus: #D32F2F;
   --success: #166534;
   --error: #cc0000;
   --radius-sm: 2px;
