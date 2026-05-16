@@ -1,23 +1,23 @@
 :root {
-  --bg-primary: #fafafa;
+  --bg-primary: #ffffff;
   --bg-secondary: #ffffff;
   --bg-upload: #f5f5f5;
-  --text-primary: #1a1a1a;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-light: #eff6ff;
-  --border: #e5e7eb;
-  --border-hover: #cbd5e1;
-  --border-focus: #2563eb;
-  --success: #16a34a;
-  --error: #dc2626;
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --text-primary: #000000;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --accent: #E53935;
+  --accent-hover: #C62828;
+  --accent-light: #f0f0f0;
+  --border: #e0e0e0;
+  --border-hover: #E53935;
+  --border-focus: #E53935;
+  --success: #166534;
+  --error: #cc0000;
+  --radius-sm: 2px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --shadow-sm: none;
+  --shadow-md: none;
 }
 
 * {
@@ -36,8 +36,8 @@ body {
   margin: 0;
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Noto Sans", sans-serif;
+  font-size: 15px;
   line-height: 1.6;
 }
 
@@ -47,7 +47,7 @@ a {
 }
 
 a:hover {
-  color: var(--accent);
+  color: #000000;
 }
 
 button,
@@ -68,7 +68,7 @@ svg {
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 2;
+  stroke-width: 2.5;
 }
 
 .site-header {
@@ -78,14 +78,14 @@ svg {
   gap: 16px;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 18px 24px;
+  padding: 20px 32px;
   border-bottom: 1px solid var(--border);
 }
 
 .logo {
   flex: 0 0 auto;
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0;
 }
 
@@ -98,28 +98,31 @@ svg {
 }
 
 .nav a[aria-current="page"] {
-  color: var(--accent);
-  font-weight: 600;
+  color: #E53935;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 main {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 42px 24px 56px;
+  padding: 64px 32px 80px;
 }
 
 .hero {
-  max-width: 720px;
-  margin: 0 auto 32px;
-  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+  text-align: left;
 }
 
 .hero h1 {
   margin: 0 0 12px;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
 .hero p {
@@ -132,32 +135,30 @@ main {
 .trust-badges {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin: 18px 0 18px;
+  gap: 24px;
+  margin: 20px 0 16px;
 }
 
-.badge {
+.trust-item {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  background: var(--accent-light);
-  color: var(--accent);
-  font-size: 14px;
-  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
 }
 
-.badge svg {
-  width: 16px;
-  height: 16px;
+.ti-check {
+  color: #E53935;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .hero .flow-hint {
-  color: var(--text-muted);
+  color: #C62828;
   font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .tool {
@@ -165,7 +166,7 @@ main {
   grid-template-columns: 336px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
-  margin-bottom: 44px;
+  margin-bottom: 56px;
 }
 
 .tool[data-state="editing"],
@@ -184,11 +185,10 @@ main {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
 }
 
 .preview-card {
-  padding: 16px;
+  padding: 20px;
 }
 
 .tool[data-state="editing"] .preview-card:not(.has-sidebar),
@@ -269,7 +269,7 @@ main {
   gap: 12px;
   padding: 24px;
   background: var(--bg-upload);
-  border: 2px dashed var(--border-hover);
+  border: 2px dashed #cccccc;
   border-radius: var(--radius-lg);
   color: var(--text-secondary);
   text-align: center;
@@ -278,8 +278,8 @@ main {
 
 .upload-zone:hover,
 .upload-zone.is-dragover {
-  background: var(--accent-light);
-  border-color: var(--accent);
+  background: #fafafa;
+  border-color: #E53935;
 }
 
 .upload-zone input {
@@ -382,7 +382,6 @@ main {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--bg-secondary);
-  box-shadow: var(--shadow-sm);
 }
 
 .demo-preview img,
@@ -447,7 +446,7 @@ main {
   gap: 4px;
   padding: 4px;
   border-radius: var(--radius-sm);
-  background: #f3f4f6;
+  background: #f0f0f0;
 }
 
 .segmented-option {
@@ -562,9 +561,9 @@ main {
   width: 282px;
   padding: 0 0 12px;
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 2px;
   background: var(--bg-secondary);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .color-popover[data-placement="top"] {
@@ -578,7 +577,7 @@ main {
   height: 160px;
   border: 0;
   border-bottom: 1px solid var(--border);
-  border-radius: 3px 3px 0 0;
+  border-radius: 2px 2px 0 0;
   cursor: crosshair;
 }
 
@@ -636,7 +635,7 @@ main {
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: 2px;
   background: linear-gradient(
     90deg,
     #ff0000 0%,
@@ -660,7 +659,6 @@ main {
   border: 2px solid #ffffff;
   border-radius: 50%;
   background: transparent;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
 
@@ -670,7 +668,6 @@ main {
   border: 2px solid #ffffff;
   border-radius: 50%;
   background: transparent;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
 
@@ -756,8 +753,8 @@ main {
 .field > input[type="range"] {
   min-height: 8px;
   border: 0;
-  border-radius: 999px;
-  background: #e5e7eb;
+  border-radius: 2px;
+  background: #e0e0e0;
   accent-color: var(--accent);
 }
 
@@ -947,15 +944,15 @@ output {
 }
 
 .features-compact {
-  margin-top: 48px;
-  padding-top: 40px;
+  margin-top: 64px;
+  padding-top: 48px;
   border-top: 1px solid var(--border);
 }
 
 .features-compact h2 {
   margin: 0 0 24px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   line-height: 1.4;
   letter-spacing: 0;
   text-align: center;
@@ -964,8 +961,8 @@ output {
 .feature-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px 28px;
-  margin-bottom: 28px;
+  gap: 24px 32px;
+  margin-bottom: 32px;
 }
 
 .feature-item {
@@ -1021,9 +1018,10 @@ output {
 
 .use-tag {
   display: inline-block;
-  padding: 6px 16px;
-  border-radius: 20px;
-  background: #f5f5f5;
+  padding: 6px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  background: #f0f0f0;
   font-size: 13px;
 }
 
@@ -1073,15 +1071,15 @@ output {
 }
 
 .content-section {
-  margin-top: 36px;
-  padding-top: 34px;
+  margin-top: 48px;
+  padding-top: 48px;
   border-top: 1px solid var(--border);
 }
 
 .content-section h2 {
   margin: 0 0 12px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   line-height: 1.4;
   letter-spacing: 0;
 }
@@ -1113,19 +1111,19 @@ output {
 
 .faq summary {
   cursor: pointer;
-  padding: 14px 16px;
-  font-weight: 600;
+  padding: 16px 20px;
+  font-weight: 700;
   line-height: 1.4;
 }
 
 .faq details p {
-  padding: 0 16px 16px;
+  padding: 0 20px 20px;
 }
 
 .site-footer {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 32px 32px;
   border-top: 1px solid var(--border);
   color: var(--text-secondary);
   font-size: 14px;
@@ -1165,7 +1163,7 @@ output {
   margin: 0 0 2px;
   color: var(--text-primary);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .link-group a {
@@ -1199,8 +1197,8 @@ output {
 }
 
 .footer-bottom {
-  margin-top: 24px;
-  padding-top: 18px;
+  margin-top: 32px;
+  padding-top: 24px;
   border-top: 1px solid var(--border);
 }
 
@@ -1232,7 +1230,15 @@ output {
   }
 
   main {
-    padding: 32px 16px 44px;
+    padding: 48px 20px 64px;
+  }
+
+  .trust-badges {
+    gap: 16px;
+  }
+
+  .hero {
+    margin-bottom: 32px;
   }
 
   .tool {
@@ -1321,7 +1327,7 @@ output {
   }
 
   .hero h1 {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .control-grid {
