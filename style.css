@@ -1004,11 +1004,10 @@ output {
   gap: 2px;
 }
 
-.feature-item strong {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-  white-space: nowrap;
+.features-compact h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .feature-item div span {
@@ -1128,6 +1127,14 @@ output {
   padding: 16px 20px;
   font-weight: 700;
   line-height: 1.4;
+}
+
+.faq summary h3 {
+  display: inline;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
 }
 
 .faq details p {
