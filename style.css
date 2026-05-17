@@ -1346,6 +1346,14 @@ output {
   .demo-preview-poster {
     display: block;
   }
+
+  .demo-preview.is-video-ready video {
+    display: block;
+  }
+
+  .demo-preview.is-video-ready .demo-preview-poster {
+    display: none;
+  }
 }
 
 @media (max-width: 520px) {

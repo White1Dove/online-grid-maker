@@ -121,31 +121,99 @@
       return;
     }
 
+    var preview = video.closest(".demo-preview");
+    var mobileViewport = window.matchMedia("(max-width: 800px)");
+    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var hasLoaded = false;
+
+    function revealDemoVideo() {
+      if (preview) {
+        preview.classList.add("is-video-ready");
+      }
+    }
+
     function loadDemoVideo() {
+      if (hasLoaded || reducedMotion.matches) {
+        return;
+      }
+
+      hasLoaded = true;
       var sources = video.querySelectorAll("source[data-src]");
       sources.forEach(function (source) {
         source.src = source.dataset.src;
         source.removeAttribute("data-src");
       });
+
+      video.addEventListener("canplay", revealDemoVideo, { once: true });
       video.load();
       video.play().catch(function () {});
     }
 
-    if (!("IntersectionObserver" in window)) {
-      loadDemoVideo();
+    function scheduleDesktopLoad() {
+      function beginAfterLoad() {
+        var fallbackTimer = window.setTimeout(loadDemoVideo, 2000);
+
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(function () {
+            window.clearTimeout(fallbackTimer);
+            loadDemoVideo();
+          }, { timeout: 2000 });
+        }
+      }
+
+      if (document.readyState === "complete") {
+        beginAfterLoad();
+      } else {
+        window.addEventListener("load", beginAfterLoad, { once: true });
+      }
+    }
+
+    function observeMobileLoad() {
+      if (!preview || !("IntersectionObserver" in window)) {
+        scheduleDesktopLoad();
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            loadDemoVideo();
+            observer.disconnect();
+          }
+        });
+      }, {
+        rootMargin: "300px 0px",
+        threshold: 0.15
+      });
+
+      var hasStartedObserving = false;
+
+      function beginObserving() {
+        if (hasStartedObserving) {
+          return;
+        }
+
+        hasStartedObserving = true;
+        observer.observe(preview);
+      }
+
+      if (window.scrollY > 0) {
+        beginObserving();
+      } else {
+        window.addEventListener("scroll", beginObserving, { once: true, passive: true });
+        window.addEventListener("touchmove", beginObserving, { once: true, passive: true });
+      }
+    }
+
+    if (reducedMotion.matches) {
       return;
     }
 
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          loadDemoVideo();
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.5 });
-
-    observer.observe(video);
+    if (mobileViewport.matches) {
+      observeMobileLoad();
+    } else {
+      scheduleDesktopLoad();
+    }
   }
 
   function bindEvents() {
