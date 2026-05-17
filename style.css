@@ -405,6 +405,10 @@ main {
   border-radius: var(--radius-md);
 }
 
+.demo-preview-poster {
+  display: none;
+}
+
 .tool[data-state="demo"] .demo-preview,
 .tool[data-state="editing"] .controls {
   animation: fade-slide-in 250ms ease both;
@@ -1335,9 +1339,12 @@ output {
     order: 13;
   }
 
-  /* Hide demo video on mobile to improve Lighthouse performance */
-  .demo-preview {
+  .demo-preview video {
     display: none;
+  }
+
+  .demo-preview-poster {
+    display: block;
   }
 }
 
