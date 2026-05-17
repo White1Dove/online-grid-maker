@@ -5,9 +5,19 @@
   Cache-Control: public, max-age=31536000, immutable
 /images/*
   Cache-Control: public, max-age=31536000, immutable
+/style.20260517.css
+  Cache-Control: public, max-age=31536000, immutable
+/app.20260517.js
+  Cache-Control: public, max-age=31536000, immutable
 /favicon.ico
   Cache-Control: public, max-age=86400
 /og-image.png
+  Cache-Control: public, max-age=86400
+/og-grid-maker.png
+  Cache-Control: public, max-age=86400
+/og-drawing-grid-maker.png
+  Cache-Control: public, max-age=86400
+/og-perspective-drawing-grid.png
   Cache-Control: public, max-age=86400
 
 # HTML pages - short cache or no-cache to allow updates
