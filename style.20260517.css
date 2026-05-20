@@ -1111,6 +1111,97 @@ output {
   margin-top: 12px;
 }
 
+.blog-list {
+  display: grid;
+  max-width: 860px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.blog-card {
+  display: grid;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+}
+
+.blog-card h2 {
+  margin: 6px 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.blog-card p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.blog-card .text-link {
+  justify-self: start;
+  margin-top: 14px;
+}
+
+.article {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  margin: 0 0 16px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.article-header h1 {
+  margin: 0 0 14px;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+.article-header p:last-child {
+  max-width: 720px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 17px;
+}
+
+.article-meta {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.text-link {
+  display: inline-flex;
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.article-list {
+  display: grid;
+  max-width: 720px;
+  margin: 0 0 16px;
+  padding-left: 20px;
+  gap: 8px;
+  color: var(--text-secondary);
+}
+
+.article-cta {
+  margin: 36px 0 0;
+}
+
 .faq {
   display: grid;
   gap: 10px;
@@ -1368,6 +1459,14 @@ output {
 
   .hero h1 {
     font-size: 28px;
+  }
+
+  .article-header h1 {
+    font-size: 30px;
+  }
+
+  .blog-card {
+    padding: 18px;
   }
 
   .control-grid {

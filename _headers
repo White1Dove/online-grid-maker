@@ -23,6 +23,8 @@
 # HTML pages - short cache or no-cache to allow updates
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+/blog/*
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Sitemap and robots - allow caching for a few hours
 /sitemap.xml
