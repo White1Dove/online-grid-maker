@@ -85,6 +85,30 @@
     paperHeight: 297
   };
 
+  var pageDefaultOverrides = {
+    grid: {
+      labels: false
+    },
+    drawing: {
+      rows: 8,
+      cols: 10,
+      opacity: 0.55,
+      labels: true,
+      paperFormat: "a4"
+    },
+    addImage: {
+      rows: 4,
+      cols: 4,
+      lineWidth: 2,
+      opacity: 0.6,
+      labels: false
+    }
+  };
+
+  if (pageDefaultOverrides[page]) {
+    Object.assign(defaults, pageDefaultOverrides[page]);
+  }
+
   var state = {
     image: null,
     renderFrame: 0,
