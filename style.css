@@ -983,6 +983,12 @@ output {
   text-align: center;
 }
 
+body[data-page="grid"] .features-compact h2,
+body[data-page="drawing"] .features-compact h2,
+body[data-page="addImage"] .features-compact h2 {
+  text-align: left;
+}
+
 .feature-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1025,6 +1031,19 @@ output {
   color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.4;
+  white-space: nowrap;
+}
+
+body[data-page="grid"] #recommended-grid-settings-title + p + .feature-list .feature-item {
+  align-items: center;
+  gap: 18px;
+}
+
+body[data-page="grid"] #recommended-grid-settings-title + p + .feature-list .fi-icon {
+  width: 88px;
+  height: auto;
+  flex-basis: 88px;
+  justify-content: flex-start;
   white-space: nowrap;
 }
 
@@ -1390,6 +1409,16 @@ output {
 
   .tool[data-state="demo"] {
     grid-template-columns: 1fr;
+  }
+
+  body[data-page="drawing"] .tool[data-state="editing"] .preview-card,
+  body[data-page="addImage"] .tool[data-state="editing"] .preview-card {
+    order: -1;
+  }
+
+  body[data-page="drawing"] .tool[data-state="editing"] .controls,
+  body[data-page="addImage"] .tool[data-state="editing"] .controls {
+    order: 2;
   }
 
   .feature-list {
